@@ -18,11 +18,9 @@ db.once('open', function() {
 //Enable parsing JSON body data
 app.use(express.json());
 
-//app.use(express.static("views"))
-
 //Serving the home page in an html file
 app.get('/', (req, res) => {
-    res.send('Welcome home')
+    res.sendFile(__dirname + '/views/home.html')
 })
 
 const toolsRouter = require ('./routes/tools.js')
