@@ -26,5 +26,8 @@ app.get('/', (req, res) => {
 const toolsRouter = require ('./routes/tools.js')
 app.use('/tools', toolsRouter)
 
+const usersRouter = require ('./routes/users.js')
+app.use('/users', usersRouter)
+
 //App Listening log
 app.listen(port, host, () => console.log(`App is listening at http://${host}:${port}/`));
