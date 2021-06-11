@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router()
 const Tool = require('../models/tools.js')
+const verify = require ('./verifyToken.js')
 
 //GET All Tools
-router.get('/', async (req, res) => {
+router.get('/', verify, async (req, res) => {
     try {
         const tools = await Tool.find();
         res.json(tools);
@@ -13,12 +14,12 @@ router.get('/', async (req, res) => {
 })
 
 //GET One Tool
-router.get('/:id', getTool, (req, res) => {
+router.get('/:id', verify, getTool, (req, res) => {
     res.json(res.tool);
 })
 
 //POST One Tool
-router.post('/', async (req, res) => {
+router.post('/', verify, async (req, res) => {
     const tool = new Tool({
         name: req.body.name,
         link: req.body.link,
@@ -36,7 +37,7 @@ router.post('/', async (req, res) => {
 })
 
 //PUT One
-router.put('/:id', getTool, async (req, res) => {
+router.put('/:id', verify, getTool, async (req, res) => {
     if (req.body.name != null) {
         res.tool.name = req.body.name
     }
@@ -61,7 +62,7 @@ router.put('/:id', getTool, async (req, res) => {
 })
 
 //DELETE One
-router.delete('/:id', getTool, async (req, res) => {
+router.delete('/:id', verify, getTool, async (req, res) => {
     try {
         await res.tool.remove()
         res.json({message: 'Deleted Tool'})

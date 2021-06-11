@@ -23,6 +23,13 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/views/home.html')
 })
 
+app.get('/menu', (req, res) => {
+    res.sendFile(__dirname + '/views/menu.html')
+})
+
+const authRouter = require ('./routes/auth.js')
+app.use('/auth', authRouter)
+
 const toolsRouter = require ('./routes/tools.js')
 app.use('/tools', toolsRouter)
 
